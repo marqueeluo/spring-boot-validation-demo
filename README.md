@@ -6,7 +6,7 @@
 
 
 
-# contraints分类
+# constraints分类
 JSR-380的支持的constrants注解汇总如下表：
 | 分类 | 注解      | 适用对象 | null是否验证通过 | 说明
 |:--------| :-- | :---- | :---- |:----
@@ -34,7 +34,7 @@ JSR-380的支持的constrants注解汇总如下表：
 | 布尔| @AssertTrue | boolean | Yes | 必须是true
 | 布尔| @AssertFalse | boolean | Yes | 必须是false
 
-# 对象集成contraints示例
+# 对象集成constraints示例
 ```java
 /**
  * 用户 - DTO
@@ -103,8 +103,8 @@ public class OrgDto {
 }
 ```
 **注：**
-- **可通过contraints注解的`groups`指定分组**
-即指定contraints仅在指定group生效，默认均为Default分组，
+- **可通过constraints注解的`groups`指定分组**
+即指定constraints仅在指定group生效，默认均为Default分组，
 后续可通过`@Validated({MyGroupInterface.class}）`形式进行分组的指定
 - **可通过`@Valid`注解进行级联验证（Cascaded Validation，即嵌套对象验证）**
 如上示例中@Valid添加在 List&lt;OrgDto&gt; orgs上，即会对list中的每个OrgDto进行验证
@@ -299,17 +299,17 @@ public class ControllerAdviceHandler {
 
 
 
-# 自定义contraints
-自定义field contraint注解主要分为以下几步：
+# 自定义constraints
+自定义field constraint注解主要分为以下几步：
 
-（1）定义`contraint annotation注解及其属性`
+（1）定义`constraint annotation注解及其属性`
 
 （2）通过注解的元注解`@Constraint(validatedBy = {})`关联的具体的验证器实现
 
 （3）实现`验证器`逻辑
 
 ## @DateFormat
-具体字符串日期格式contraint @DateFormat定义示例如下：
+具体字符串日期格式constraint @DateFormat定义示例如下：
 ```java
 
 import javax.validation.Constraint;
@@ -379,7 +379,7 @@ public class DateFormatValidator implements ConstraintValidator<DateFormat, Stri
 }
 ```
 ## @PhoneNo
-在查看hbernate-validator中URL、Email约束实现时，发现可以通过元注解的形式去复用contraint实现（如@Pattern），故参考如上方式实现@PhoneNo约束
+在查看hbernate-validator中URL、Email约束实现时，发现可以通过元注解的形式去复用constraint实现（如@Pattern），故参考如上方式实现@PhoneNo约束
 
 ```java
 import javax.validation.Constraint;
@@ -442,7 +442,7 @@ public @interface PhoneNo {
 
 ```
 **注：** 同理可以实现@IdNo约束
-## 使用自定义contraints注解
+## 使用自定义constraints注解
 
 可将之前的对象集成示例中代码调整为使用自定义验证注解如下：
 
@@ -500,7 +500,7 @@ public class UserDto {
 
 [【JSR380、非Spring框架集成validation】https://www.baeldung.com/javax-validation](https://www.baeldung.com/javax-validation)
 
-[【方法约束 - Single param、Cross param、Return value自定义contraints、编程调用验证】https://www.baeldung.com/javax-validation-method-constraints](https://www.baeldung.com/javax-validation-method-constraints)
+[【方法约束 - Single param、Cross param、Return value自定义constraints、编程调用验证】https://www.baeldung.com/javax-validation-method-constraints](https://www.baeldung.com/javax-validation-method-constraints)
 
 [Spring Validation最佳实践及其实现原理，参数校验没那么简单！](https://segmentfault.com/a/1190000023471742)
 
