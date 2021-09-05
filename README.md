@@ -1,5 +1,6 @@
 # spring-boot-validation-demo
 参考：
+
 [【自定义validator - field、class level】https://www.baeldung.com/spring-mvc-custom-validator](https://www.baeldung.com/spring-mvc-custom-validator)
 
 [【Spring boot集成validation、全局异常处理】https://www.baeldung.com/spring-boot-bean-validation](https://www.baeldung.com/spring-boot-bean-validation)
