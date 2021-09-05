@@ -1,17 +1,4 @@
 # spring-boot-validation-demo
-参考：
-
-[【自定义validator - field、class level】https://www.baeldung.com/spring-mvc-custom-validator](https://www.baeldung.com/spring-mvc-custom-validator)
-
-[【Spring boot集成validation、全局异常处理】https://www.baeldung.com/spring-boot-bean-validation](https://www.baeldung.com/spring-boot-bean-validation)
-
-[【JSR380、非Spring框架集成validation】https://www.baeldung.com/javax-validation](https://www.baeldung.com/javax-validation)
-
-[【方法约束 - Single param、Cross param、Return value自定义contraints、编程调用验证】https://www.baeldung.com/javax-validation-method-constraints](https://www.baeldung.com/javax-validation-method-constraints)
-
-[Spring Validation最佳实践及其实现原理，参数校验没那么简单！](https://segmentfault.com/a/1190000023471742)
-
-[https://reflectoring.io/bean-validation-with-spring-boot/](https://reflectoring.io/bean-validation-with-spring-boot/)
 
 提到输入参数的基本验证（非空、长度、大小、格式...），在以前我们还是通过手写代码，各种if、else、StringUtils.isEmpty、CollectionUtils.isEmpty...，真感觉快要疯了，太繁琐，Low爆了...，其实在Java生态提供了一套标准[JSR-380（aka. Bean Validation 2.0，part of Jakarta EE and JavaSE）](https://jcp.org/en/jsr/detail?id=380)，它已成为`对象验证`事实上的标准，这套标准可以通过注解的形式（如@NotNull, @Size...）来对bean的属性进行验证。而`Hibernate Validator`对这套标准进行了实现，`SpringBoot Validation`无缝集成了Hibernate Validator、自定义验证器、自动验证的功能。下文将对SpringBoot集成Validation进行展开。
 
@@ -505,6 +492,19 @@ public class UserDto {
 **所以一方开发时，首选推荐SpringBoot Validation这套体系，无法直接编辑参数对象时再考虑其他方式。**
 
 
+参考：
+
+[【自定义validator - field、class level】https://www.baeldung.com/spring-mvc-custom-validator](https://www.baeldung.com/spring-mvc-custom-validator)
+
+[【Spring boot集成validation、全局异常处理】https://www.baeldung.com/spring-boot-bean-validation](https://www.baeldung.com/spring-boot-bean-validation)
+
+[【JSR380、非Spring框架集成validation】https://www.baeldung.com/javax-validation](https://www.baeldung.com/javax-validation)
+
+[【方法约束 - Single param、Cross param、Return value自定义contraints、编程调用验证】https://www.baeldung.com/javax-validation-method-constraints](https://www.baeldung.com/javax-validation-method-constraints)
+
+[Spring Validation最佳实践及其实现原理，参数校验没那么简单！](https://segmentfault.com/a/1190000023471742)
+
+[https://reflectoring.io/bean-validation-with-spring-boot/](https://reflectoring.io/bean-validation-with-spring-boot/)
 
 
 
