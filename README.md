@@ -136,7 +136,7 @@ JSR-380的支持的constrants注解汇总如下表：
         <td>匹配正则表达式</td>
     </tr>
     <tr>
-        <td>@Email&lt;br/&gt;@Email(regexp=".*", flags={})</td>
+        <td>@Email<br/>@Email(regexp=".*", flags={})</td>
         <td>CharSequence</td>
         <td>Yes</td>
         <td>匹配邮箱格式</td>
