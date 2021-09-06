@@ -8,31 +8,160 @@
 
 # constraints分类
 JSR-380的支持的constrants注解汇总如下表：
-| 分类 | 注解      | 适用对象 | null是否验证通过 | 说明
-|:--------| :-- | :---- | :---- |:----
-| 非空 | @NotNull | 所有对象| No | 不是null
-| 非空 | @NotEmpty | CharSequence, Collection, Map, Array | No | 不是null、不是""、size>0
-| 非空 | @NotBlank | CharSequence | No | 不是null、trim后长度大于0
-| 非空 | @Null | 所有对象 | Yes | 是null
-| 长度 | @Size(min=0, max=Integer.MAX_VALUE) | CharSequence, Collection, Map, Array | Yes | 字符串长度、集合size
-| 大小 | @Positive | BigDecimal, BigInteger, byte, short, int, long, float, double | Yes | 数字>0
-| 大小 | @PositiveOrZero | BigDecimal, BigInteger, byte, short, int, long, float, double | Yes | 数字>=0
-| 大小 | @Negative | BigDecimal, BigInteger, byte, short, int, long, float, double | Yes | 数字<0
-| 大小 | @NegativeOrZero | BigDecimal, BigInteger, byte, short, int, long, float, double | Yes | 数字<=0
-| 大小 | @Min(value=0L) | BigDecimal, BigInteger, byte, short, int, long | Yes | 数字>=min.value
-| 大小 | @Max(value=0L) | BigDecimal, BigInteger, byte, short, int, long | Yes | 数字<=max.value
-| 大小 | @Range(min=0L, max=Long.MAX_VALUE) | BigDecimal, BigInteger, byte, short, int, long | Yes | range.min<=数字<=range.max
-| 大小 | @DecimalMin(value="") | BigDecimal, BigInteger, CharSequence, byte, short, int, long | Yes | 数字>=decimalMin.value
-| 大小 | @DecimalMax(value="") | BigDecimal, BigInteger, CharSequence, byte, short, int, long | Yes | 数字<=decimalMax.value
-| 日期 | @Past | <ul><li>java.util.Date</li><li>java.util.Calendar</li><li>java.time.Instant</li><li>java.time.LocalDate</li><li>java.time.LocalDateTime</li><li>java.time.LocalTime</li><li>java.time.MonthDay</li><li>java.time.OffsetDateTime</li><li>java.time.OffsetTime</li><li>java.time.Year</li><li>java.time.YearMonth</li><li>java.time.ZonedDateTime</li><li>java.time.chrono.HijrahDate</li><li>java.time.chrono.JapaneseDate</li><li>java.time.chrono.MinguoDate</li><li>java.time.chrono.ThaiBuddhistDate</li></ul> | Yes | 时间在当前时间之前
-| 日期 | @PastOrPresent | 同上 | Yes | 时间在当前时间之前 或者等于此时
-| 日期 | @Future | 同上 | Yes | 时间在当前时间之后
-| 日期 | @FutureOrPresent | 同上 | Yes | 时间在当前时间之后 或者等于此时
-| 格式 | @Pattern(regexp="", flags={}) | CharSequence | Yes | 匹配正则表达式
-| 格式 | @Email<br/>@Email(regexp=".*", flags={})| CharSequence | Yes | 匹配邮箱格式
-| 格式 | @Digts(integer=0, fraction=0) | BigDecimal, BigInteger, CharSequence, byte, short, int, long | Yes | 必须是数字类型，且满足整数位数<=digits.integer, 浮点位数<=digits.fraction
-| 布尔| @AssertTrue | boolean | Yes | 必须是true
-| 布尔| @AssertFalse | boolean | Yes | 必须是false
+<table>
+    <tr>
+        <th>分类</th>
+        <th>注解</th>
+        <th>适用对象</th>
+        <th>null是否验证通过</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td rowspan="4">非空</td>
+        <td>@NotNull</td>
+        <td>所有对象</td>
+        <td>No</td>
+        <td>不是null</td>
+    </tr>
+    <tr>
+        <td>@NotEmpty</td>
+        <td>CharSequence, Collection, Map, Array</td>
+        <td>No</td>
+        <td>不是null、不是""、size&gt;0</td>
+    </tr>
+    <tr>
+        <td>@NotBlank</td>
+        <td>CharSequence</td>
+        <td>No</td>
+        <td>不是null、trim后长度大于0</td>
+    </tr>
+    <tr>
+        <td>@Null</td>
+        <td>所有对象</td>
+        <td>Yes</td>
+        <td>是null</td>
+    </tr>
+    <tr>
+        <td>长度</td>
+        <td>@Size(min=0, max=Integer.MAX_VALUE)</td>
+        <td>CharSequence, Collection, Map, Array</td>
+        <td>Yes</td>
+        <td>字符串长度、集合size</td>
+    </tr>
+    <tr>
+        <td rowspan="9">大小</td>
+        <td>@Positive</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long, float, double</td>
+        <td>Yes</td>
+        <td>数字&gt;0</td>
+    </tr>
+    <tr>
+        <td>@PositiveOrZero</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long, float, double</td>
+        <td>Yes</td>
+        <td>数字&gt;=0</td>
+    </tr>
+    <tr>
+        <td>@Negative</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long, float, double</td>
+        <td>Yes</td>
+        <td>数字&lt;0</td>
+    </tr>
+    <tr>
+        <td>@NegativeOrZero</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long, float, double</td>
+        <td>Yes</td>
+        <td>数字&lt;=0</td>
+    </tr>
+    <tr>
+        <td>@Min(value=0L)</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>数字&gt;=min.value</td>
+    </tr>
+    <tr>
+        <td>@Max(value=0L)</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>数字&lt;=max.value</td>
+    </tr>
+    <tr>
+        <td>@Range(min=0L, max=Long.MAX_VALUE)</td>
+        <td>BigDecimal, BigInteger, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>range.min&lt;=数字&lt;=range.max</td>
+    </tr>
+    <tr>
+        <td>@DecimalMin(value="")</td>
+        <td>BigDecimal, BigInteger, CharSequence, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>数字&gt;=decimalMin.value</td>
+    </tr>
+    <tr>
+        <td>@DecimalMax(value="")</td>
+        <td>BigDecimal, BigInteger, CharSequence, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>数字&lt;=decimalMax.value</td>
+    </tr>
+    <tr>
+        <td rowspan="4">日期</td>
+        <td>@Past</td>
+        <td><ul><li>java.util.Date</li><li>java.util.Calendar</li><li>java.time.Instant</li><li>java.time.LocalDate</li><li>java.time.LocalDateTime</li><li>java.time.LocalTime</li><li>java.time.MonthDay</li><li>java.time.OffsetDateTime</li><li>java.time.OffsetTime</li><li>java.time.Year</li><li>java.time.YearMonth</li><li>java.time.ZonedDateTime</li><li>java.time.chrono.HijrahDate</li><li>java.time.chrono.JapaneseDate</li><li>java.time.chrono.MinguoDate</li><li>java.time.chrono.ThaiBuddhistDate</li></ul></td>
+        <td>Yes</td>
+        <td>时间在当前时间之前</td>
+    </tr>
+    <tr>
+        <td>@PastOrPresent</td>
+        <td>同上</td>
+        <td>Yes</td>
+        <td>时间在当前时间之前 或者等于此时</td>
+    </tr>
+    <tr>
+        <td>@Future</td>
+        <td>同上</td>
+        <td>Yes</td>
+        <td>时间在当前时间之后</td>
+    </tr>
+    <tr>
+        <td>@FutureOrPresent</td>
+        <td>同上</td>
+        <td>Yes</td>
+        <td>时间在当前时间之后 或者等于此时</td>
+    </tr>
+    <tr>
+        <td rowspan="3">格式</td>
+        <td>@Pattern(regexp="", flags={})</td>
+        <td>CharSequence</td>
+        <td>Yes</td>
+        <td>匹配正则表达式</td>
+    </tr>
+    <tr>
+        <td>@Email&lt;br/&gt;@Email(regexp=".*", flags={})</td>
+        <td>CharSequence</td>
+        <td>Yes</td>
+        <td>匹配邮箱格式</td>
+    </tr>
+    <tr>
+        <td>@Digts(integer=0, fraction=0)</td>
+        <td>BigDecimal, BigInteger, CharSequence, byte, short, int, long</td>
+        <td>Yes</td>
+        <td>必须是数字类型，且满足整数位数&lt;=digits.integer, 浮点位数&lt;=digits.fraction</td>
+    </tr>
+    <tr>
+        <td rowspan="2">布尔</td>
+        <td>@AssertTrue</td>
+        <td>boolean</td>
+        <td>Yes</td>
+        <td>必须是true</td>
+    </tr>
+    <tr>
+        <td>@AssertFalse</td>
+        <td>boolean</td>
+        <td>Yes</td>
+        <td>必须是false</td>
+    </tr>
+</table>
+
 
 # 对象集成constraints示例
 ```java
